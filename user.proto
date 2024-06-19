@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+package users;
+
+service UserService {
+    rpc FindAll (FindAllRequest) returns (Users) {}
+    rpc FindOne (FindOneRequest) returns (User) {}
+    rpc FindByUserName (FindByUserNameRequest) returns (User) {}
+    rpc Create (CreateRequest) returns (User) {}
+    rpc Update (UpdateRequest) returns (User) {}
+    rpc Delete (DeleteRequest) returns (User) {}
+}
+
+message FindAllRequest {}
+message FindOneRequest {
+    int32 id = 1;
+}
+
+message FindByUserNameRequest {
+    string userName = 1;
+}
+
+message CreateRequest {
+    UserPayload payload = 1;
+}
+
+message UpdateRequest {
+    string userName = 1;
+    UserPayload payload = 2;
+}
+
+message DeleteRequest {
+    string userName = 1;
+}
+
+message UserPayload {
+    string userName = 1;
+}
+
+message User {
+    int32 id = 1;
+    string userName = 2;
+    int64 createAt = 3;
+    int64 updateAt = 4;
+    repeated int32 teamIds = 5;
+    repeated int32 taskIds = 6;
+    repeated int32 commentIds = 7;
+}
+
+message Users {
+    repeated User users = 1;
+}
