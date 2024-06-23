@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package user;
+package team;
 
 service UserService {
     rpc FindAll (FindAllRequest) returns (Users) {}
