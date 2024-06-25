@@ -14,11 +14,7 @@ service AuthService {
 }
 
 message CreateUserRequest {
-    string name = 1;
-    string lastName = 2;
-    string userName = 3;
-    string email = 4;
-    string password = 5;
+    UserDto user = 1;
 }
 
 message UserRequest {
@@ -69,4 +65,12 @@ message RecoverPasswordResponse {
     bool success = 1;
     string message = 2;
     string error = 3;
+}
+
+message UserDto {
+    string name = 1;
+    string lastName = 2;
+    string userName = 3;
+    string email = 4;
+    string password = 5;
 }
