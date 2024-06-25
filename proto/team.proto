@@ -27,8 +27,8 @@ message UserRequest {
 }
 
 message UpdateUserRequest {
-    string userId = 1;
-    string userName = 2;
+    string userName = 1;
+    string payload = 2;
 }
 
 message UserResponse {
