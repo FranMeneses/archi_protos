@@ -2,51 +2,184 @@ syntax = "proto3";
 
 package team;
 
+//Metodos para user
 service UserService {
-    rpc FindAll (FindAllRequest) returns (Users) {}
-    rpc FindOne (FindOneRequest) returns (User) {}
-    rpc FindByUserName (FindByUserNameRequest) returns (User) {}
-    rpc Create (CreateRequest) returns (User) {}
-    rpc Update (UpdateRequest) returns (User) {}
-    rpc Delete (DeleteRequest) returns (User) {}
+    rpc CreateUser(CreateUserRequest) returns (UserResponse) {}
+    rpc FindAllUsers(EmptyRequest) returns (UsersResponse) {}
+    rpc FindOneUser(UserRequest) returns (UserResponse) {}
+    rpc UpdateUser(UpdateUserRequest) returns (UserResponse) {}
+    rpc DeleteUser(UserRequest) returns (EmptyRequest) {}
 }
 
-message FindAllRequest {}
-message FindOneRequest {
-    int32 id = 1;
-}
+message EmptyRequest {}
 
-message FindByUserNameRequest {
+message CreateUserRequest {
     string userName = 1;
 }
 
-message CreateRequest {
-    UserPayload payload = 1;
+message UserRequest {
+    string userId = 1;
 }
 
-message UpdateRequest {
-    string userName = 1;
-    UserPayload payload = 2;
+message UpdateUserRequest {
+    string userId = 1;
+    string userName = 2;
 }
 
-message DeleteRequest {
-    string userName = 1;
+message UserResponse {
+    User user = 1;
 }
 
-message UserPayload {
-    string userName = 1;
+message UsersResponse {
+    repeated User users = 1;
 }
 
 message User {
-    int32 id = 1;
-    string userName = 2;
-    int32 createAt = 3;
-    int32 updateAt = 4;
-    repeated int32 teamIds = 5;
-    repeated int32 taskIds = 6;
-    repeated int32 commentIds = 7;
+    string userName = 1;
 }
 
-message Users {
-    repeated User users = 1;
+//Metodos para team
+service TeamService {
+    rpc CreateTeam(CreateTeamRequest) returns (TeamResponse) {}
+    rpc FindAllTeams(EmptyRequest) returns (TeamsResponse) {}
+    rpc FindOneTeam(TeamRequest) returns (TeamResponse) {}
+    rpc UpdateTeam(UpdateTeamRequest) returns (TeamResponse) {}
+    rpc DeleteTeam(TeamRequest) returns (EmptyRequest) {}
+}
+
+message CreateTeamRequest {
+    string teamName = 1;
+}
+
+message TeamRequest {
+    string teamId = 1;
+}
+
+message UpdateTeamRequest {
+    string teamId = 1;
+    string teamName = 2;
+}
+
+message TeamResponse {
+    Team team = 1;
+}
+
+message TeamsResponse {
+    repeated Team teams = 1;
+}
+
+message Team {
+    string teamId = 1;
+    string teamName = 2;
+}
+
+//Metodos para project
+service ProjectService {
+    rpc CreateProject(CreateProjectRequest) returns (ProjectResponse) {}
+    rpc FindAllProjects(EmptyRequest) returns (ProjectsResponse) {}
+    rpc FindOneProject(ProjectRequest) returns (ProjectResponse) {}
+    rpc UpdateProject(UpdateProjectRequest) returns (ProjectResponse) {}
+    rpc DeleteProject(ProjectRequest) returns (EmptyRequest) {}
+}
+
+message CreateProjectRequest {
+    string projectName = 1;
+}
+
+message ProjectRequest {
+    string projectId = 1;
+}
+
+message UpdateProjectRequest {
+    string projectId = 1;
+    string projectName = 2;
+}
+
+message ProjectResponse {
+    Project project = 1;
+}
+
+message ProjectsResponse {
+    repeated Project projects = 1;
+}
+
+message Project {
+    string projectId = 1;
+    string projectName = 2;
+}
+
+//Metodos para task
+service TaskService {
+    rpc CreateTask(CreateTaskRequest) returns (TaskResponse) {}
+    rpc FindAllTasks(EmptyRequest) returns (TasksResponse) {}
+    rpc FindOneTask(TaskRequest) returns (TaskResponse) {}
+    rpc UpdateTask(UpdateTaskRequest) returns (TaskResponse) {}
+    rpc DeleteTask(TaskRequest) returns (EmptyRequest) {}
+}
+
+message CreateTaskRequest {
+    string taskName = 1;
+    string projectId = 2;
+}
+
+message TaskRequest {
+    string taskId = 1;
+}
+
+message UpdateTaskRequest {
+    string taskId = 1;
+    string taskName = 2;
+    string projectId = 3;
+}
+
+message TaskResponse {
+    Task task = 1;
+}
+
+message TasksResponse {
+    repeated Task tasks = 1;
+}
+
+message Task {
+    string taskId = 1;
+    string taskName = 2;
+    string projectId = 3;
+}
+
+//Metodos para comment
+service CommentService {
+    rpc CreateComment(CreateCommentRequest) returns (CommentResponse) {}
+    rpc FindAllComments(EmptyRequest) returns (CommentsResponse) {}
+    rpc FindOneComment(CommentRequest) returns (CommentResponse) {}
+    rpc UpdateComment(UpdateCommentRequest) returns (CommentResponse) {}
+    rpc DeleteComment(CommentRequest) returns (EmptyRequest) {}
+}
+
+message CreateCommentRequest {
+    string commentText = 1;
+    string taskId = 2;
+}
+
+message CommentRequest {
+    string commentId = 1;
+}
+
+message UpdateCommentRequest {
+    string commentId = 1;
+    string commentText = 2;
+    string taskId = 3;
+}
+
+message CommentResponse {
+    Comment comment = 1;
+}
+
+message CommentsResponse {
+    repeated Comment comments = 1;
+}
+
+message Comment {
+    string commentId = 1;
+    string commentText = 2;
+    string taskId = 3;
 }
