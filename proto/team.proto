@@ -13,6 +13,11 @@ service UserService {
 
 message EmptyRequest {}
 
+message Error {
+    int32 code = 1;
+    string message = 2;
+}
+
 message CreateUserRequest {
     string userName = 1;
 }
@@ -180,7 +185,7 @@ message CommentsResponse {
 
 message Comment {
     string commentId = 1;
-    string content = 2;
+    string commentText = 2;
     uint32 taskId = 3;
     string userName = 4;
 }
