@@ -69,8 +69,7 @@ message TeamsResponse {
 }
 
 message Team {
-    string teamId = 1;
-    string teamName = 2;
+    string teamName = 1;
 }
 
 //Metodos para project
@@ -104,8 +103,8 @@ message ProjectsResponse {
 }
 
 message Project {
-    string projectId = 1;
-    string projectName = 2;
+    string projectName = 1;
+    uint32 teamId = 2;
 }
 
 //Metodos para task
@@ -143,7 +142,8 @@ message TasksResponse {
 message Task {
     string taskId = 1;
     string taskName = 2;
-    string projectId = 3;
+    string description = 3;
+    uint32 projectId = 4;
 }
 
 //Metodos para comment
@@ -180,6 +180,7 @@ message CommentsResponse {
 
 message Comment {
     string commentId = 1;
-    string commentText = 2;
-    string taskId = 3;
+    string content = 2;
+    uint32 taskId = 3;
+    string userName = 4;
 }
