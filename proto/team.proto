@@ -8,7 +8,7 @@ service UserService {
     rpc FindAllUsers(EmptyRequest) returns (UsersResponse) {}
     rpc FindOneUser(UserRequest) returns (UserResponse) {}
     rpc UpdateUser(UpdateUserRequest) returns (UserResponse) {}
-    rpc DeleteUser(UserRequest) returns (EmptyRequest) {}
+    rpc DeleteUser(DeleteUserRequest) returns (EmptyRequest) {}
 }
 
 message EmptyRequest {}
@@ -29,6 +29,10 @@ message UserRequest {
 message UpdateUserRequest {
     string userName = 1;
     User payload = 2;
+}
+
+message DeleteUserRequest {
+    string userName = 1;
 }
 
 message UserResponse {
